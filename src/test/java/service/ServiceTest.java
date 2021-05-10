@@ -90,10 +90,22 @@ class ServiceTest {
 
     @Test
     void testDeleteStudent() {
+        Student student1 = new Student("26","Jancsi",555);
+        int result = service.saveStudent(student1.getID(),student1.getName(),student1.getGroup());
+        assertEquals(1,result);
+
+        result = service.deleteStudent(student1.getID());
+        assertEquals(0,result);
     }
 
     @Test
     void testDeleteHomework() {
+        Homework hw = new Homework("245","Never forget", 13,10);
+        int result = service.saveHomework(hw.getID(), hw.getDescription(), hw.getDeadline(), hw.getStartline());
+        assertEquals(1, result);
+
+        result = service.deleteHomework(hw.getID());
+        assertEquals(0,result);
     }
 
     @Test
@@ -109,6 +121,11 @@ class ServiceTest {
 
     @Test
     void testUpdateHomework() {
+        Homework hw = new Homework("245","Never forget", 13,10);
+        int result = service.saveHomework(hw.getID(), hw.getDescription(), hw.getDeadline(), hw.getStartline());
+        assertEquals(1, result);
+        result = service.updateHomework(hw.getID(),"Never gonna give you up",hw.getDeadline(), hw.getStartline());
+        assertEquals(1, result);
     }
 
     @Test
