@@ -108,20 +108,10 @@ public class Service {
         Homework homework = homeworkXmlRepo.findOne(id);
 
         if (homework != null) {
-            LocalDate date = LocalDate.now();
-            WeekFields weekFields = WeekFields.of(Locale.getDefault());
-            int currentWeek = date.get(weekFields.weekOfWeekBasedYear());
 
-            if (currentWeek >= 39) {
-                currentWeek = currentWeek - 39;
-            } else {
-                currentWeek = currentWeek + 12;
-            }
-
-            if (currentWeek <= homework.getDeadline()) {
                 int deadlineNou = homework.getDeadline() + noWeeks;
                 return updateHomework(homework.getID(), homework.getDescription(), deadlineNou, homework.getStartline());
-            }
+
         }
         return 0;
     }

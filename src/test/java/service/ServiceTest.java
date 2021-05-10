@@ -133,6 +133,29 @@ class ServiceTest {
     }
 
     @Test
+    void validDeadlineExtension(){
+        Homework hw = new Homework("245","Never forget", 10,6);
+        int result = service.saveHomework(hw.getID(), hw.getDescription(), hw.getDeadline(), hw.getStartline());
+        assertEquals(1, result);
+
+        result = service.extendDeadline(hw.getID(),2);
+        assertEquals(1, result);
+
+        service.deleteHomework(hw.getID());
+    }
+    @Test
+    void invalidDeadlineExtension(){
+        Homework hw = new Homework("245","Never forget", 10,6);
+        int result = service.saveHomework(hw.getID(), hw.getDescription(), hw.getDeadline(), hw.getStartline());
+        assertEquals(1, result);
+
+        result = service.extendDeadline(hw.getID(),-512);
+        assertEquals(0, result);
+
+        service.deleteHomework(hw.getID());
+    }
+
+    @Test
     void testCreateStudentFile() {
     }
 
